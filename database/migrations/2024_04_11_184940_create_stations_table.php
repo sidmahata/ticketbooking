@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('stations', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
+            $table->foreignId('zone_id')->constrained();
             $table->timestamps();
         });
     }

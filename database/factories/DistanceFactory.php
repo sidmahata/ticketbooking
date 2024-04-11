@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Station;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,16 @@ class DistanceFactory extends Factory
      */
     public function definition(): array
     {
+        $stations = Station::all();
+        $fromRand = random_int(0, count($stations)-1);
+        do {
+            $toRand = random_int(0, count($stations)-1);
+        } while($fromRand==$toRand);
+
         return [
-            //
+            'distance' => fake()->numberBetween(0, 100),
+            'from_station_id'=>$stations[$fromRand]->id,
+            'to_station_id'=>$stations[$toRand]->id,
         ];
     }
 }

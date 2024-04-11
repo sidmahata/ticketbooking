@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('distances', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('from_station_id')->references('id')->on('stations');
+            $table->foreignId('to_station_id')->references('id')->on('stations');
+            $table->integer('distance');
             $table->timestamps();
         });
     }

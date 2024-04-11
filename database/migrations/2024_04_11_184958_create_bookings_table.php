@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->string('client_name');
+            $table->foreignId('from_station_id')->references('id')->on('stations');
+            $table->foreignId('to_station_id')->references('id')->on('stations');
+            $table->integer('total_distance');
+            $table->float('total_fare');
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Zone;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,8 @@ class ZoneSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Zone::factory()->count(4)
+        ->hasStations(8)
+        ->create();
     }
 }

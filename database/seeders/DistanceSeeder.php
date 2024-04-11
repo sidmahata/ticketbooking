@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Distance;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class DistanceSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Distance::factory()->count(64)->create();
     }
 }
