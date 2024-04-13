@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Zone;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateZoneRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateZoneRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()!=null;
     }
 
     /**
@@ -22,7 +24,7 @@ class UpdateZoneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=>['required', Rule::unique(Zone::class)->ignore($this->zone)]
         ];
     }
 }

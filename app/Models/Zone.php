@@ -10,6 +10,8 @@ class Zone extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function stations(): HasMany
     {
         return $this->hasMany(Station::class);

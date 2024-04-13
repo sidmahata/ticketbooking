@@ -13,7 +13,7 @@ class ZoneController extends Controller
      */
     public function index()
     {
-        //
+        return view('zone.index', ['zones'=>Zone::orderBy('id', 'desc')->get()]);
     }
 
     /**
@@ -21,7 +21,7 @@ class ZoneController extends Controller
      */
     public function create()
     {
-        //
+        return view('zone.create');
     }
 
     /**
@@ -29,7 +29,8 @@ class ZoneController extends Controller
      */
     public function store(StoreZoneRequest $request)
     {
-        //
+        Zone::create($request->validated());
+        return redirect()->route('zones');
     }
 
     /**
@@ -45,7 +46,7 @@ class ZoneController extends Controller
      */
     public function edit(Zone $zone)
     {
-        //
+        return view('zone.edit', ['zone'=>$zone]);
     }
 
     /**
@@ -53,7 +54,8 @@ class ZoneController extends Controller
      */
     public function update(UpdateZoneRequest $request, Zone $zone)
     {
-        //
+        $zone->update($request->validated());
+        return redirect()->route('zones');
     }
 
     /**
@@ -61,6 +63,7 @@ class ZoneController extends Controller
      */
     public function destroy(Zone $zone)
     {
-        //
+        $zone->delete();
+        return redirect()->route('zones');
     }
 }
