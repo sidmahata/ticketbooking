@@ -1,14 +1,15 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DistanceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StationController;
 use App\Http\Controllers\ZoneController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [BookingController::class, 'create'])->name('booking.create');
+Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+Route::get('/booking/show/{booking}', [BookingController::class, 'show'])->name('booking.show');
 
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/dashboard', function () {
@@ -37,6 +38,9 @@ Route::middleware(['auth', 'verified'])->group(function(){
         Route::get('/edit/{distance}', [DistanceController::class, 'edit'])->name('.edit');
         Route::put('/update/{distance}', [DistanceController::class, 'update'])->name('.update');
         Route::get('/delete/{distance}', [DistanceController::class, 'destroy'])->name('.delete');
+    });
+    Route::prefix('booking')->as('booking')->group(function(){
+        Route::get('/', [BookingController::class, 'index'])->name('');
     });
 });
 

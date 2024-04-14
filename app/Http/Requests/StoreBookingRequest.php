@@ -11,7 +11,7 @@ class StoreBookingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,19 @@ class StoreBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'from_station'=>['required'],
+            'to_station'=>['required', function ($attribute, $value, $fail) {
+                if ($value === $this->from_station) {
+                    $fail($attribute.' cannot be same as from station.');
+                }
+            },],
+            'client_name'=>['required'],
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'client_name.required' => 'Your name is required.',
         ];
     }
 }

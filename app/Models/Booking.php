@@ -4,8 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Booking extends Model
 {
     use HasFactory;
+
+    public function fromStation(): BelongsTo
+    {
+        return $this->belongsTo(Station::class, 'from_station_id');
+    }
+    public function toStation(): BelongsTo
+    {
+        return $this->belongsTo(Station::class, 'to_station_id');
+    }
 }

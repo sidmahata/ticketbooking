@@ -16,6 +16,7 @@
                     <x-nav-link :href="route('zone')" :active="request()->routeIs('zone')">{{ __('Zones') }}</x-nav-link>
                     <x-nav-link :href="route('station')" :active="request()->routeIs('station')">{{ __('Stations') }}</x-nav-link>
                     <x-nav-link :href="route('distance')" :active="request()->routeIs('distance')">{{ __('Distances') }}</x-nav-link>
+                    <x-nav-link :href="route('booking')" :active="request()->routeIs('booking')">{{ __('Bookings') }}</x-nav-link>
                 </div>
             </div>
 

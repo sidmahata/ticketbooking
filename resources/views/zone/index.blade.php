@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($zones as $zone)
+                            @forelse ($zones as $zone)
                             <tr>
                                 <td class="text-left p-4 ">{{$zone->name}}</td>
                                 <td class="text-left p-4 ">
@@ -32,7 +32,11 @@
                                     <a href="{{route('zone.delete', ['zone'=>$zone->id])}}">{{__('Delete')}}</a>
                                 </td>
                             </tr>
-                            @endforeach                            
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-center p-4 ">No record found</td>
+                            </tr>
+                            @endforelse                             
                         </tbody>
                     </table>
                 </div>
