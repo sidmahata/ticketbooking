@@ -34,10 +34,6 @@
                                 <td class="text-left p-4 ">{{$booking->toStation->name}}</td>
                                 <td class="text-left p-4 ">{{$booking->total_distance}}</td>
                                 <td class="text-left p-4 ">{{$booking->total_fare}}</td>
-                                <td class="text-left p-4 ">
-                                    <a class="pe-2" href="{{route('distance.edit', ['distance'=>$distance->id])}}">{{__('Edit')}}</a>
-                                    <a href="{{route('distance.delete', ['distance'=>$distance->id])}}">{{__('Delete')}}</a>
-                                </td>
                             </tr>
                             @empty
                             <tr>
