@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreStationRequest;
 use App\Http\Requests\UpdateStationRequest;
 use App\Models\Station;
+use App\Models\Zone;
 
 class StationController extends Controller
 {
@@ -13,7 +14,7 @@ class StationController extends Controller
      */
     public function index()
     {
-        //
+        return view('station.index', ['stations'=>Station::with(['zone'])->orderBy('id', 'desc')->get()]);
     }
 
     /**
@@ -21,7 +22,7 @@ class StationController extends Controller
      */
     public function create()
     {
-        //
+        return view('station.create', ['zones'=>Zone::all()]);
     }
 
     /**
@@ -29,7 +30,11 @@ class StationController extends Controller
      */
     public function store(StoreStationRequest $request)
     {
-        //
+        Station::create([
+            'name'=>$request->name,
+            'zone_id'=>$request->zone,
+        ]);
+        return redirect()->route('station');
     }
 
     /**
@@ -45,7 +50,7 @@ class StationController extends Controller
      */
     public function edit(Station $station)
     {
-        //
+        return view('station.edit', ['station'=>$station, 'zones'=>Zone::all()]);
     }
 
     /**
@@ -53,7 +58,11 @@ class StationController extends Controller
      */
     public function update(UpdateStationRequest $request, Station $station)
     {
-        //
+        $station->update([
+            'name'=>$request->name,
+            'zone_id'=>$request->zone,
+        ]);
+        return redirect()->route('station');
     }
 
     /**
@@ -61,6 +70,7 @@ class StationController extends Controller
      */
     public function destroy(Station $station)
     {
-        //
+        $station->delete();
+        return redirect()->route('station');
     }
 }

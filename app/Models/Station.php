@@ -11,6 +11,8 @@ class Station extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'zone_id'];
+
     public function zone(): BelongsTo
     {
         return $this->belongsTo(Zone::class, 'zone_id');

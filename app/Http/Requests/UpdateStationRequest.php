@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Station;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateStationRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateStationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()!=null;
     }
 
     /**
@@ -22,7 +24,8 @@ class UpdateStationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'=>['required', Rule::unique(Station::class)->ignore($this->station)],
+            'zone'=>['required'],
         ];
     }
 }

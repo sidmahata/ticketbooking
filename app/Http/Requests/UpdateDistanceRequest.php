@@ -11,7 +11,7 @@ class UpdateDistanceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()!=null;
     }
 
     /**
@@ -22,7 +22,13 @@ class UpdateDistanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'from_station'=>['required'],
+            'to_station'=>['required', function ($attribute, $value, $fail) {
+                if ($value === $this->from_station) {
+                    $fail('To station cannot be same as from station.');
+                }
+            },],
+            'distance'=>['required', 'integer', 'gt:0'],
         ];
     }
 }

@@ -17,7 +17,7 @@
 
                             <div>
                                 <x-input-label for="zone_name" :value="__('Name')" />
-                                <x-text-input id="zone_name" name="name" class="mt-1 block w-full" />
+                                <x-text-input id="zone_name" name="name" :value="old('name', '')" class="mt-1 block w-full" />
                                 @error('name')
                                     <x-input-error :messages="$message" class="mt-2" />
                                 @enderror

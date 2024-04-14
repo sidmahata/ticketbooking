@@ -30,7 +30,7 @@ class ZoneController extends Controller
     public function store(StoreZoneRequest $request)
     {
         Zone::create($request->validated());
-        return redirect()->route('zones');
+        return redirect()->route('zone');
     }
 
     /**
@@ -55,7 +55,7 @@ class ZoneController extends Controller
     public function update(UpdateZoneRequest $request, Zone $zone)
     {
         $zone->update($request->validated());
-        return redirect()->route('zones');
+        return redirect()->route('zone');
     }
 
     /**
@@ -64,6 +64,6 @@ class ZoneController extends Controller
     public function destroy(Zone $zone)
     {
         $zone->delete();
-        return redirect()->route('zones');
+        return redirect()->route('zone');
     }
 }

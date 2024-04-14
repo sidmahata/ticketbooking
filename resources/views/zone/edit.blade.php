@@ -21,8 +21,7 @@
                                 <x-text-input id="zone_name" name="name" :value="old('name', $zone->name)" class="mt-1 block w-full" />
                                 @error('name')
                                     <x-input-error :messages="$message" class="mt-2" />
-                                @enderror
-                                
+                                @enderror                                
                             </div>
                             <div class="flex items-center gap-4">
                                 <x-primary-button>{{ __('Save') }}</x-primary-button>

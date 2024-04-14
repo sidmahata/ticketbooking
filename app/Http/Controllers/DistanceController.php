@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDistanceRequest;
 use App\Http\Requests\UpdateDistanceRequest;
 use App\Models\Distance;
+use App\Models\Station;
 
 class DistanceController extends Controller
 {
@@ -13,7 +14,7 @@ class DistanceController extends Controller
      */
     public function index()
     {
-        //
+        return view('distance.index', ['distances'=>Distance::with(['fromStation', 'toStation'])->orderBy('id', 'desc')->get()]);
     }
 
     /**
@@ -21,7 +22,7 @@ class DistanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('distance.create', ['stations'=>Station::all()]);
     }
 
     /**
@@ -29,7 +30,12 @@ class DistanceController extends Controller
      */
     public function store(StoreDistanceRequest $request)
     {
-        //
+        Distance::create([
+            'from_station_id'=>$request->from_station,
+            'to_station_id'=>$request->to_station,
+            'distance'=>$request->distance,
+        ]);
+        return redirect()->route('distance');
     }
 
     /**
@@ -45,7 +51,7 @@ class DistanceController extends Controller
      */
     public function edit(Distance $distance)
     {
-        //
+        return view('distance.edit', ['distance'=>$distance, 'stations'=>Station::all()]);
     }
 
     /**
@@ -53,7 +59,12 @@ class DistanceController extends Controller
      */
     public function update(UpdateDistanceRequest $request, Distance $distance)
     {
-        //
+        $distance->update([
+            'from_station_id'=>$request->from_station,
+            'to_station_id'=>$request->to_station,
+            'distance'=>$request->distance,
+        ]);
+        return redirect()->route('distance');
     }
 
     /**
@@ -61,6 +72,7 @@ class DistanceController extends Controller
      */
     public function destroy(Distance $distance)
     {
-        //
+        $distance->delete();
+        return redirect()->route('distance');
     }
 }
