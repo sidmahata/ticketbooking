@@ -1,13 +1,25 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="columns-2">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <div class="flex justify-between h-16">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight py-4">
                 {{ __('Bookings') }}
             </h2>
-            <div class="text-right">
-                <!-- <a href="{{route('distance.create')}}">
-                    <x-primary-button>{{ __('Add Distance') }}</x-primary-button>
-                </a> -->
+            <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <x-dropdown align="right">
+                    <x-slot name="trigger">
+                        <x-primary-button>
+                            {{ __('Reports') }}&nbsp;
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </x-primary-button>                        
+                    </x-slot>
+                    <x-slot name="content">
+                        <x-dropdown-link :href="route('booking.report', ['type'=>'pdf'])">{{ __('Download Pdf') }}</x-dropdown-link>
+                        <x-dropdown-link :href="route('booking.report', ['type'=>'excel'])">{{ __('Download Excel') }}</x-dropdown-link>
+                        <x-dropdown-link :href="route('booking.report', ['type'=>'csv'])">{{ __('Download CSV') }}</x-dropdown-link>
+                    </x-slot>
+                </x-dropdown>
             </div>
         </div>        
     </x-slot>

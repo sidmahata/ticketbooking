@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\DistanceCalculator;
+use App\Contracts\Report;
 use App\Http\Requests\StoreBookingRequest;
 use App\Http\Requests\UpdateBookingRequest;
 use App\Models\Booking;
 use App\Models\Station;
 use App\Services\NewBookingService;
+use PdfReport;
+use ExcelReport;
+use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
@@ -68,5 +72,25 @@ class BookingController extends Controller
     public function destroy(Booking $booking)
     {
         //
+    }
+    public function report(Report $report, Request $request){
+        $queryBuilder = Booking::with(['fromStation', 'toStation'])->orderBy('id', 'desc');
+        $columns = [
+            'Client Name' => 'client_name',
+            'From Station' => function($result) {
+                return $result->fromStation->name;
+            },
+            'To Station' => function($result) {
+                return $result->toStation->name;
+            },
+            'Total Distance' => 'total_distance',
+            'Total Fare' => 'total_fare'
+        ];
+        return $report->download(
+            queryBuilder: $queryBuilder,
+            columns: $columns,
+            type: $request->type,
+            fileName: "Booking Report"
+        );
     }
 }

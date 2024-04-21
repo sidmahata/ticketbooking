@@ -41,6 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
     });
     Route::prefix('booking')->as('booking')->group(function(){
         Route::get('/', [BookingController::class, 'index'])->name('');
+        Route::get('/report/{type}', [BookingController::class, 'report'])->name('.report');
     });
 });
 
