@@ -28,4 +28,12 @@ class Booking extends Model
             'to_station' => $this->toStation->name,
         ];
     }
+    public function getElasticsearchIndexName(): string
+    {
+        return tenant('id').'_'.$this->getTable();
+    }
+    public function getElasticsearchId(): string
+    {
+        return $this->getKey();
+    }
 }

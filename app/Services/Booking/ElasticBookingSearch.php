@@ -25,7 +25,7 @@ class ElasticBookingSearch implements BookingSearch{
     {
         $model = new Booking;
         $items = $this->client->search([
-            'index' => $model->getTable(),
+            'index' => $model->getElasticsearchIndexName(),
             'type' => '_doc',
             'body' => [
                 'query' => [

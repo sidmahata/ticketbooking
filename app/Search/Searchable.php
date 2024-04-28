@@ -16,9 +16,9 @@ trait Searchable
     public function elasticsearchIndex(Client $elasticsearchClient)
     {
         $elasticsearchClient->index([
-            'index' => $this->getTable(),
+            'index' => $this->getElasticsearchIndexName(),
             'type' => '_doc',
-            'id' => $this->getKey(),
+            'id' => $this->getElasticsearchId(),
             'body' => $this->toElasticsearchDocumentArray(),
         ]);
     }
@@ -26,11 +26,13 @@ trait Searchable
     public function elasticsearchDelete(Client $elasticsearchClient)
     {
         $elasticsearchClient->delete([
-            'index' => $this->getTable(),
+            'index' => $this->getElasticsearchIndexName(),
             'type' => '_doc',
             'id' => $this->getKey(),
         ]);
     }
 
     abstract public function toElasticsearchDocumentArray(): array;
+    abstract public function getElasticsearchIndexName(): string;
+    abstract public function getElasticsearchId(): string;
 }
