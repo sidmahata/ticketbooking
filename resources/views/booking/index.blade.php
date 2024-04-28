@@ -23,38 +23,56 @@
             </div>
         </div>        
     </x-slot>
-
-    <div class="py-12">
+    <div class="pt-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white shadow sm:rounded-lg p-4">
+                <form action="{{ route('booking') }}" method="get">
+                    <div class="form-group">
+                        <x-text-input
+                            type="text"
+                            name="search"
+                            class="form-control"
+                            placeholder="Search..."
+                            value="{{ request('search') }}"
+                        />
+                    </div>
+                </form>
+                @if (request()->has('search'))
+                    <p class="text-sm mt-2">Using search: <strong>"{{ request('search') }}"</strong>. <a class="border-b border-indigo-800 text-indigo-800" href="{{ route('booking') }}">Clear filters</a></p>
+                @endif
+            </div>
+        </div>
+    </div>
+    
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white shadow sm:rounded-lg">
-                <div class="">
-                    <table class="table-auto w-full">
-                        <thead>
-                            <tr>
-                            <th class="text-left p-4 border-b">Client Name</th>
-                            <th class="text-left p-4 border-b">Fron Station</th>
-                            <th class="text-left p-4 border-b">To Station</th>
-                            <th class="text-left p-4 border-b">Total Distance(Km)</th>
-                            <th class="text-left p-4 border-b">Total Fare ($)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($bookings as $booking)
-                            <tr>
-                                <td class="text-left p-4 ">{{$booking->client_name}}</td>
-                                <td class="text-left p-4 ">{{$booking->fromStation->name}}</td>
-                                <td class="text-left p-4 ">{{$booking->toStation->name}}</td>
-                                <td class="text-left p-4 ">{{$booking->total_distance}}</td>
-                                <td class="text-left p-4 ">{{$booking->total_fare}}</td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="5" class="text-center p-4 ">No record found</td>
-                            </tr>
-                            @endforelse                        
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table-auto w-full">
+                    <thead>
+                        <tr>
+                        <th class="text-left p-4 border-b">Client Name</th>
+                        <th class="text-left p-4 border-b">From Station</th>
+                        <th class="text-left p-4 border-b">To Station</th>
+                        <th class="text-left p-4 border-b">Total Distance(Km)</th>
+                        <th class="text-left p-4 border-b">Total Fare ($)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($bookings as $booking)
+                        <tr>
+                            <td class="text-left p-4 ">{{$booking->client_name}}</td>
+                            <td class="text-left p-4 ">{{$booking->fromStation->name}}</td>
+                            <td class="text-left p-4 ">{{$booking->toStation->name}}</td>
+                            <td class="text-left p-4 ">{{$booking->total_distance}}</td>
+                            <td class="text-left p-4 ">{{$booking->total_fare}}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="text-center p-4 ">No record found</td>
+                        </tr>
+                        @endforelse                        
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

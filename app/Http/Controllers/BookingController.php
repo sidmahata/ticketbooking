@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\BookingSearch;
 use App\Contracts\DistanceCalculator;
 use App\Contracts\Report;
 use App\Http\Requests\StoreBookingRequest;
@@ -18,9 +19,15 @@ class BookingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(BookingSearch $bookingSearch)
     {
-        return view('booking.index', ['bookings'=>Booking::with(['fromStation', 'toStation'])->orderBy('id', 'desc')->get()]);
+        $bookings = [];
+        if(request()->has('search')){
+            $bookings = $bookingSearch->search(request('search'));
+        }else{
+            $bookings = Booking::with(['fromStation', 'toStation'])->orderBy('id', 'desc')->get();
+        }
+        return view('booking.index', ['bookings'=>$bookings]);
     }
 
     /**
