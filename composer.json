@@ -7,10 +7,12 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-snappy": "^1.0",
+        "elasticsearch/elasticsearch": "^8.13",
         "jimmyjs/laravel-report-generator": "^2.2",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
-        "league/csv": "^9.0"
+        "league/csv": "^9.0",
+        "stancl/tenancy": "^3.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
