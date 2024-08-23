@@ -13,16 +13,24 @@ trait Searchable
         }
     }
 
+    /**
+     * @param Client $elasticsearchClient
+     * @return void
+     */
     public function elasticsearchIndex(Client $elasticsearchClient)
     {
         $elasticsearchClient->index([
             'index' => $this->getElasticsearchIndexName(),
             'type' => '_doc',
-            'id' => $this->getElasticsearchId(),
+            'id' =>  $this->getElasticsearchId(),
             'body' => $this->toElasticsearchDocumentArray(),
         ]);
     }
 
+    /**
+      *  @param Client $elasticsearchClient
+      *  @return void
+      */
     public function elasticsearchDelete(Client $elasticsearchClient)
     {
         $elasticsearchClient->delete([

@@ -35,7 +35,8 @@ class BookingController extends Controller
      */
     public function create()
     {
-        return view('booking.create', ['stations'=>Station::all()]);
+        $stations = Station::all();
+        return view('booking.create', ['stations'=>$stations]);
     }
 
     /**
